@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户研究 / 市场研究 Skill 大全</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --ink: #1c2333;
+    --muted: #6b7280;
+    --line: #e7e9f0;
+    --accent: #4f46e5;
+    --accent2: #7c3aed;
+    --rec: #f59e0b;
+    --ok: #059669;
+    --warn: #d97706;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(16,24,40,.05), 0 4px 14px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #312e81 0%, #4f46e5 55%, #7c3aed 100%);
+    color: #fff;
+    padding: 56px 24px 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; letter-spacing: .5px; }
+  .hero .sub { margin-top: 10px; opacity: .85; font-size: 15px; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .hero-stats {
+    display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;
+    margin-top: 26px;
+  }
+  .hero-stats .stat {
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+    backdrop-filter: blur(4px);
+    border-radius: 12px; padding: 10px 18px; min-width: 116px;
+  }
+  .hero-stats .stat b { display: block; font-size: 24px; font-weight: 800; }
+  .hero-stats .stat span { font-size: 12px; opacity: .8; }
+
+  /* Controls */
+  .controls {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 24px;
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: center;
+  }
+  .search {
+    flex: 1 1 260px; max-width: 380px;
+    padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: 14px; outline: none; background: #fff;
+  }
+  .search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 7px 13px; font-size: 13px; cursor: pointer; color: var(--muted);
+    transition: all .15s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .toggle {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; color: var(--muted); cursor: pointer; user-select: none;
+    padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff;
+  }
+  .toggle.on { color: var(--rec); border-color: var(--rec); background: #fffaf0; }
+  select {
+    padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: 13px; background: #fff; color: var(--ink); cursor: pointer;
+  }
+
+  /* Layout */
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 22px 24px 60px; }
+  .result-info { font-size: 13px; color: var(--muted); margin: 6px 2px 16px; }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 16px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px 18px 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16,24,40,.12); }
+  .card .topline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .cat {
+    font-size: 11px; font-weight: 700; letter-spacing: .3px;
+    padding: 3px 9px; border-radius: 999px; color: #fff;
+  }
+  .flag { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--rec); }
+  .card h3 { font-size: 17px; font-weight: 700; }
+  .card h3 a { color: var(--ink); }
+  .card h3 a:hover { color: var(--accent); text-decoration: none; }
+  .card .desc { font-size: 13.5px; color: #4b5563; flex: 1; }
+  .card .meta {
+    border-top: 1px dashed var(--line); padding-top: 10px;
+    display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12.5px; color: var(--muted);
+  }
+  .meta .installs { color: var(--accent); font-weight: 700; }
+  .meta .stars { color: #b45309; }
+  .audit { padding: 1px 7px; border-radius: 6px; font-size: 11px; }
+  .audit.pass { background: #ecfdf5; color: var(--ok); }
+  .audit.warn { background: #fffbeb; color: var(--warn); }
+
+
+
+
+
+  .layout { display: flex; gap: 22px; align-items: flex-start; }
+  .sidebar {
+    flex: 0 0 232px; position: sticky; top: 74px;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 12px; box-shadow: var(--shadow);
+  }
+  .sidebar h4 { font-size: 12px; color: var(--muted); margin: 4px 6px 10px; font-weight: 600; }
+  .side-item {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+    padding: 8px 10px; border: none; background: none; border-radius: 9px;
+    cursor: pointer; font-size: 13.5px; color: var(--ink); text-align: left; margin-bottom: 2px;
+  }
+  .side-item:hover { background: #f1f2f7; }
+  .side-item.active { background: var(--accent); color: #fff; font-weight: 600; }
+  .side-item .count {
+    margin-left: auto; font-size: 11px; background: #eef0f7; color: var(--muted);
+    border-radius: 999px; padding: 1px 8px;
+  }
+  .side-item.active .count { background: rgba(255,255,255,.25); color: #fff; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 9px; }
+  .main { flex: 1; min-width: 0; }
+  @media (max-width: 860px) {
+    .layout { flex-direction: column; }
+    .sidebar { position: static; flex: none; width: 100%; display: flex; overflow-x: auto; gap: 6px; padding: 10px; }
+    .sidebar h4 { display: none; }
+    .side-item { width: auto; white-space: nowrap; }
+    .side-item .count { display: none; }
+  }
+
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(15,23,42,.55); backdrop-filter: blur(3px);
+    display: none; align-items: flex-start; justify-content: center;
+    padding: 28px 16px; overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 16px; max-width: 780px; width: 100%;
+    box-shadow: 0 24px 70px rgba(15,23,42,.35); overflow: hidden;
+    animation: pop .18s ease;
+  }
+  @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-head { padding: 22px 24px 14px; border-bottom: 1px solid var(--line); position: relative; }
+  .modal-head h2 { font-size: 22px; font-weight: 800; padding-right: 42px; }
+  .modal-close {
+    position: absolute; top: 16px; right: 18px;
+    border: none; background: #f1f2f7; border-radius: 8px; width: 32px; height: 32px;
+    font-size: 16px; cursor: pointer; color: var(--muted);
+  }
+  .modal-close:hover { background: #e5e7ef; color: var(--ink); }
+  .modal-body { padding: 18px 24px 26px; }
+  .m-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .m-sec { font-size: 13.5px; color: #4b5563; line-height: 1.75; margin-top: 14px; }
+  .m-sec b { color: var(--ink); }
+  .m-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 10px; margin-top: 14px; }
+  .m-fact { background: #f8f9fc; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+  .m-fact b { display: block; font-size: 15px; word-break: break-all; }
+  .m-fact span { font-size: 11.5px; color: var(--muted); }
+  .risk-box {
+    margin-top: 14px; font-size: 13px; color: #7f1d1d;
+    background: #fef2f2; border: 1px solid #fecaca; padding: 12px 14px; border-radius: 10px;
+    line-height: 1.7;
+  }
+  .m-install { margin-top: 16px; background: #0f172a; border-radius: 12px; padding: 14px 16px; color: #e2e8f0; }
+  .m-install .cmd { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .m-install code {
+    flex: 1 1 100%; min-width: 220px; font-size: 13px; color: #7dd3fc; word-break: break-all;
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .cpbtn { border: none; border-radius: 8px; padding: 8px 14px; font-size: 13px; cursor: pointer; background: var(--accent); color: #fff; font-weight: 600; }
+  .cpbtn.copied { background: var(--ok); }
+  .m-install ol { margin: 12px 0 0 18px; font-size: 12.5px; color: #cbd5e1; line-height: 1.9; }
+  .m-install .alt { margin-top: 12px; font-size: 12px; color: #94a3b8; }
+  .m-install .alt code { font-size: 12px; }
+  .m-method-title { font-size: 13px; font-weight: 700; color: #e2e8f0; margin: 16px 0 8px; display: flex; align-items: center; gap: 8px; }
+  .m-method-title span { font-size: 18px; }
+  .m-prompt {
+    background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+  }
+  .m-prompt code {
+    display: block; font-size: 12.5px; line-height: 1.75; color: #1e293b;
+    white-space: pre-wrap; word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    margin-bottom: 10px;
+  }
+  .m-usage { margin: 0; font-size: 13.5px; line-height: 1.7; color: #334155; }
+  .m-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; }
+  .m-links a { font-size: 13.5px; font-weight: 600; }
+  .m-note {
+    margin-top: 14px; font-size: 12.5px; color: #92400e;
+    background: #fffbeb; border: 1px solid #fde68a; padding: 10px 12px; border-radius: 10px;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 18px; padding: 8px 18px 8px 10px;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px; backdrop-filter: blur(4px);
+    color: #fff; text-decoration: none;
+  }
+  .brand:hover { background: rgba(255,255,255,.22); text-decoration: none; }
+  .brand-logo {
+    width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+    background: #fff; border: 2px solid rgba(255,255,255,.9);
+  }
+  .brand-name { font-size: 17px; font-weight: 800; letter-spacing: 3px; }
+  .footer-logo { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; vertical-align: -5px; margin-right: 6px; background: #fff; }
+  .brand-stat {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+    backdrop-filter: blur(4px); border-radius: 12px; padding: 8px 16px 8px 8px;
+  }
+  .brand-stat img {
+    width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+    background: #fff; border: 2px solid rgba(255,255,255,.9);
+  }
+  .brand-stat .t { text-align: left; }
+  .brand-stat .t b { display: block; font-size: 15px; font-weight: 800; letter-spacing: 2px; }
+  .brand-stat .t span { font-size: 12px; opacity: .85; }
+
+      /* Sections */
+  .footer {
+    text-align: center; color: var(--muted); font-size: 12.5px;
+    padding: 26px 20px 40px; border-top: 1px solid var(--line); margin-top: 30px;
+  }
+  @media (max-width: 640px) {
+    .controls { justify-content: stretch; }
+    .search { flex: 1 1 100%; max-width: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>用户研究 / 市场研究 Skill 大全</h1>
+  <p class="sub">从市场规模、竞品研究，到招募、访谈、问卷、可用性测试、日记研究、卡片分类、洞察综合与研究资料库 —— 76 个可获取的 Agent Skill 导航（含「真知浩见出品」5 个）</p>
+  <div class="hero-stats">
+    <div class="brand-stat" title="由 真知浩见 整理">
+      <img src="logo.jpg" alt="真知浩见 logo">
+      <div class="t"><b>真知浩见</b><span>整理出品</span></div>
+    </div>
+    <div class="stat"><b id="stat-count">66</b><span>收录 Skill</span></div>
+    <div class="stat"><b>7</b><span>大分类</span></div>
+    <div class="stat"><b id="stat-installs">--</b><span>合计安装次数</span></div>
+    <div class="stat"><b>8</b><span>研究环节</span></div>
+  </div>
+</div>
+
+<div class="controls">
+  <input type="text" class="search" id="search" placeholder="搜索 skill 名称 / 简介 / 来源仓库…" autocomplete="off">
+  <label class="toggle" id="toggleTop"><input type="checkbox" id="topCheck" hidden> ⭐ 只看重点推荐</label>
+  <select id="sort">
+    <option value="installs-desc">按安装量：高 → 低</option>
+    <option value="installs-asc">按安装量：低 → 高</option>
+    <option value="stars-desc">按仓库 Star：高 → 低</option>
+    <option value="name-asc">按名称排序</option>
+  </select>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+    <aside class="sidebar">
+      <h4>按分类筛选</h4>
+      <div id="side-list"></div>
+    </aside>
+    <main class="main">
+      <div class="result-info" id="result-info"></div>
+      <div class="grid" id="grid"></div>
+    </main>
+  </div>
+
+</div>
+
+<div class="modal-overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <h2 id="m-name"></h2>
+      <div class="m-tags" id="m-tags"></div>
+      <button class="modal-close" id="m-close" title="关闭">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="risk-box" id="m-risk" style="display:none"><b id="m-risk-text"></b></div>
+      <div class="m-sec" id="m-desc"></div>
+      <div class="m-sec"><b>工作流程</b><br><span id="m-flow"></span><br><br><span style="font-size:12px;color:#9ca3af">* 以上为基于公开简介整理的典型工作方式，具体以 SKILL.md 为准。</span></div>
+      <div class="m-sec"><b>分类定位</b><br><span id="m-guides"></span></div>
+      <div class="m-facts">
+        <div class="m-fact"><b id="m-installs"></b><span>安装次数</span></div>
+        <div class="m-fact"><b id="m-stars"></b><span>仓库 Stars</span></div>
+        <div class="m-fact"><b id="m-updated"></b><span>最近更新</span></div>
+        <div class="m-fact"><b id="m-audit"></b><span>安全审计</span></div>
+        <div class="m-fact"><b id="m-source"></b><span>来源仓库</span></div>
+      </div>
+      <div class="m-install">
+        <div class="m-method-title"><span>①</span>安装方法一：命令行安装（推荐）</div>
+        <div class="cmd"><code id="m-cmd"></code><button class="cpbtn" id="m-copy">复制命令</button></div>
+        <ol>
+          <li>复制上面的安装命令，在终端中执行（想全局安装可加 <code>-g</code>）。</li>
+          <li>用前先阅读 SKILL.md 与 skills.sh 的安全审计，确认依赖与风险。</li>
+        </ol>
+      </div>
+      <div class="m-install">
+        <div class="m-method-title"><span>②</span>安装方法二：告诉 AI 帮你安装</div>
+        <div class="m-prompt"><code id="m-prompt"></code><button class="cpbtn" id="m-copy-prompt">复制这句话</button></div>
+        <ol>
+          <li>复制上面这句话，直接发给 Codex / Claude Code / Cursor 等支持 Agent Skills 的工具，它会帮你完成安装。</li>
+        </ol>
+      </div>
+      <div class="m-install">
+        <div class="m-method-title"><span>③</span>使用方法</div>
+        <div class="m-prompt"><p class="m-usage" id="m-usage"></p></div>
+      </div>
+      <div class="m-links">
+        <a id="m-skill-link" target="_blank" rel="noopener">在 skills.sh 查看详情 ↗</a>
+        <a id="m-repo-link" target="_blank" rel="noopener">查看 GitHub 仓库 ↗</a>
+      </div>
+      <div class="m-note">第三方 skill 不等于官方背书：安装即信任作者。建议先在隔离/非生产环境试用，检查脚本内容与网络请求后再正式使用。</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <img src="logo.jpg" alt="真知浩见" class="footer-logo"><b>真知浩见</b> 出品 · 数据截至 2026-08-06 · 安装次数来自 skills.sh 去重统计，GitHub Star / 最近更新来自仓库主页 ·
+  分类与简介为人工整理，安装前请先阅读对应 SKILL.md 与安全审计 · 「重点推荐」为作者在公众号文章中写过/实测过的第三方 skill（真知浩见出品不参与标记）
+</div>
+
+<script id="skills-data" type="application/json">
+[
+  {"n":"customer-research","cats":["q","txt","ins"],"d":"从访谈、问卷、评论、工单、社区内容中提炼 VOC、ICP、Persona、JTBD；也能指导在线找资料","f":"先判断材料类型：已有访谈/问卷/评论/工单则进入抽取模式，没有则先定位 Reddit、G2、评论站等信源；随后按问题整理成主题、引用和模式；最后输出 VOC 引用库、Persona 或 JTBD 地图与研究缺口清单。","i":74977,"u":"https://www.skills.sh/coreyhaines31/marketingskills/customer-research","r":"coreyhaines31/marketingskills","s":43163,"p":"2026-07-29","a":"pass+warn"},
+  {"n":"firecrawl-market-research","cats":["ind"],"d":"用 Firecrawl 抓取市场、行业、公司和财务资料，适合证据型案头研究","f":"先定义研究问题与目标站点，用 Firecrawl 抓取市场/行业/公司/财务页面；再抽取结构化指标并交叉核对来源；最后输出带来源链接与关键指标的市场简报。","i":30534,"u":"https://www.skills.sh/firecrawl/firecrawl-workflows/firecrawl-market-research","r":"firecrawl/firecrawl-workflows","s":113,"p":"2026-06-19","a":"pass+warn"},
+  {"n":"market-sizing-analysis","cats":["ind","qt"],"d":"用 top-down、bottom-up、value theory 三种方法估 TAM/SAM/SOM，强调三角验证","f":"先明确目标市场与客户基数，分别用自上而下、自下而上、价值理论三种口径估算；再对三种结果做差异分析与三角验证；最后输出 TAM/SAM/SOM、方法与假设清单。","i":9083,"u":"https://www.skills.sh/wshobson/agents/market-sizing-analysis","r":"wshobson/agents","s":38520,"p":"2026-08-05","a":"pass"},
+  {"n":"market-research","cats":["ind","ins"],"d":"市场、竞品、行业与投资者尽调，强调来源归因和面向决策的摘要","f":"先拆解研究问题并规划信息源，联网收集市场、竞品、行业与公司数据并记录来源；再交叉验证冲突信息；最后输出面向决策的摘要与未尽事项。","i":6881,"u":"https://www.skills.sh/affaan-m/everything-claude-code/market-research","r":"affaan-m/everything-claude-code","s":238054,"p":"2026-08-05","a":"pass+warn"},
+  {"n":"market-sizing","cats":["ind"],"d":"用自上而下和自下而上两种方法估算 TAM/SAM/SOM","f":"先明确产品与目标客户，选择自上而下或自下而上口径；再按细分拆解推算市场规模；最后输出 TAM/SAM/SOM 与关键假设。","i":2034,"u":"https://www.skills.sh/phuryn/pm-skills/market-sizing","r":"phuryn/pm-skills","s":24900,"p":"2026-07-03","a":"pass+warn"},
+  {"n":"market-segments","cats":["ind","qt"],"d":"识别 3–5 个细分市场，描述人群、JTBD 与产品匹配度","f":"先收集目标市场背景与候选人群，按人口特征/行为/需求聚类候选细分；再评估每个细分的 JTBD 与产品契合度；最后输出 3–5 个细分画像与优先级。","i":1979,"u":"https://www.skills.sh/phuryn/pm-skills/market-segments","r":"phuryn/pm-skills","s":24900,"p":"2026-07-03","a":"pass"},
+  {"n":"market-research-reports","cats":["ind","viz","ins"],"d":"生成咨询式长篇市场研究报告，覆盖 PESTLE、五力、SWOT、BCG 和 TAM/SAM/SOM，输出 LaTeX/PDF","f":"先生成 5–6 张核心框架图（PESTLE/五力/BCG 等）与大纲；再逐章写市场数据、分析与结论，过程中可联网查证；最后排版成咨询风格报告并导出 PDF。","i":1658,"u":"https://www.skills.sh/davila7/claude-code-templates/market-research-reports","r":"davila7/claude-code-templates","s":30121,"p":"2026-08-05","a":"pass+warn"},
+  {"n":"market-research-analysis","cats":["ind","ins"],"d":"市场规模、竞品和专业市场研究报告的一体化分析","f":"先收集市场规模、趋势与竞品资料；再按框架组织成分析结构与图表；最后给出机会评估与市场报告。","i":791,"u":"https://www.skills.sh/manojbajaj95/claude-gtm-plugin/market-research-analysis","r":"manojbajaj95/claude-gtm-plugin","s":82,"p":"2026-05-18","a":"pass"},
+  {"n":"google-trends-research","cats":["ind","viz"],"d":"用 Google Trends 研究关键词热度、季节性和地区差异","f":"先确定关键词与地区/时间范围，用 Google Trends 拉取相对热度与季节性曲线；再对比多个关键词识别趋势差异；最后输出热度解读与结论摘要。","i":774,"u":"https://www.skills.sh/postplusai/postplus-skills/google-trends-research","r":"postplusai/postplus-skills","s":19,"p":"2026-07-27","a":"pass"},
+  {"n":"discover-market-sizing","cats":["ind"],"d":"用 top-down、bottom-up、可比公司和类似市场多法估算并三角验证","f":"先选择估算框架（自上而下/自下而上/可比公司/类比市场）；再分口径计算并记录假设来源；最后多法比对，输出区间化结论。","i":380,"u":"https://www.skills.sh/product-on-purpose/pm-skills/discover-market-sizing","r":"product-on-purpose/pm-skills","s":519,"p":"2026-08-04","a":"pass"},
+  {"n":"product-research","cats":["q","ind"],"d":"选择生成式/评估式研究方法，并建立可追溯、可复用的产品研究资料库","f":"先按目标确定研究方法（生成式/评估式）与样本计划；再执行访谈/测试并记录原始证据；最后把发现沉淀为可检索、可追溯的研究资料库条目。","i":169,"u":"https://www.skills.sh/alirezarezvani/claude-skills/product-research","r":"alirezarezvani/claude-skills","s":23878,"p":"2026-08-05","a":"pass"},
+  {"n":"market-sizing","cats":["ind"],"d":"输出带来源、假设和双路径估算的 market-sizing.md","f":"先收集市场数据与客户基数，用 top-down 和 bottom-up 双路径估算；再补充数据来源与假设；最后输出完整的 market-sizing.md。","i":159,"u":"https://www.skills.sh/onewave-ai/claude-skills/market-sizing","r":"onewave-ai/claude-skills","s":240,"p":"2026-07-15","a":"pass"},
+  {"n":"market-research","cats":["ind"],"d":"强制 top-down 与 bottom-up 双估算，避免无来源的单一市场数字","f":"先按目标市场选择估算口径，强制自上而下与自下而上两路计算；再校验假设与来源；最后给出带方法说明与置信度的市场规模结论。","i":142,"u":"https://www.skills.sh/alirezarezvani/claude-skills/market-research","r":"alirezarezvani/claude-skills","s":23878,"p":"2026-08-05","a":"pass"},
+  {"n":"market-research","cats":["ind"],"d":"面向创业机会的市场规模、市场动态和机会验证","f":"先界定市场规模与增长驱动因素；再结合客户、竞品与渠道验证机会大小；最后输出是否值得追入的判断依据。","i":136,"u":"https://www.skills.sh/shawnpang/startup-founder-skills/market-research","r":"shawnpang/startup-founder-skills","s":285,"p":"2026-03-16","a":"pass"},
+  {"n":"market-sizing","cats":["ind"],"d":"用明确假设、不确定性和场景估算市场/细分机会规模，官方来源","f":"先明确细分与使用场景，列出明确假设与不确定性；再按场景计算规模区间；最后输出带假设清单与不确定性的估算。","i":18,"u":"https://www.skills.sh/openai/role-specific-plugins/market-sizing","r":"openai/role-specific-plugins","s":483,"p":"2026-07-13","a":"pass+warn"},
+  {"n":"competitive-analysis","cats":["ind"],"d":"竞争威胁、定位、替代方案和竞争战役分析","f":"先确定竞品名单与对比维度（产品/价格/定位/消息）；再逐家收集证据并归档；最后输出威胁评估、差异点和应对建议。","i":2675,"u":"https://www.skills.sh/refoundai/lenny-skills/competitive-analysis","r":"refoundai/lenny-skills","s":1220,"p":"2026-07-16","a":"pass"},
+  {"n":"competitive-analysis","cats":["ind","ins"],"d":"面向竞争格局演示文稿的定位、竞品深挖、横向比较和战略综合","f":"先梳理竞争格局与市场定位；再对每家竞品做深挖（产品、财务、战略）；最后综合为对比页与战略建议。","i":1350,"u":"https://www.skills.sh/anthropics/financial-services-plugins/competitive-analysis","r":"anthropics/financial-services-plugins","s":34026,"p":"2026-08-04","a":"pass"},
+  {"n":"competitive-analysis","cats":["ind","usa"],"d":"对比竞品 UX 模式、功能、优势和空白，衔接体验设计判断","f":"先选定竞品并列出对比维度；再逐项对比界面与交互模式；最后输出功能差异、优劣势与空白机会。","i":1012,"u":"https://www.skills.sh/owl-listener/designer-skills/competitive-analysis","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"discover-competitive-analysis","cats":["ind"],"d":"对 3–5 个直接/间接竞品比较功能、价格、定位并生成 2×2 地图","f":"先选择 3–5 个直接/间接竞品；再对比功能、价格与定位；最后生成 2×2 定位图与差异结论。","i":559,"u":"https://www.skills.sh/product-on-purpose/pm-skills/discover-competitive-analysis","r":"product-on-purpose/pm-skills","s":519,"p":"2026-08-04","a":"pass"},
+  {"n":"longbridge-competitive-analysis","cats":["ind"],"d":"用五力、同业横评和定位框架研究竞争结构，偏资本市场/公司研究","f":"先建立行业结构与五力框架；再收集同业数据做横评；最后输出竞争结构与重点标的判断。","i":510,"u":"https://www.skills.sh/longbridge/skills/longbridge-competitive-analysis","r":"longbridge/skills","s":46,"p":"2026-07-20","a":"pass"},
+  {"n":"strategy-and-competitive-analysis","cats":["ind","ins"],"d":"用 Good Strategy、五力、SWOT、蓝海等框架形成战略判断","f":"先收集市场与竞品证据；再套用 Good Strategy、五力、SWOT、蓝海等框架分析；最后形成战略建议与执行要点。","i":459,"u":"https://www.skills.sh/lyndonkl/claude/strategy-and-competitive-analysis","r":"lyndonkl/claude","s":141,"p":"2026-08-04","a":"pass"},
+  {"n":"competitive-analysis","cats":["ind","ins"],"d":"研究竞品定位、信息表达、内容策略和市场存在，适合 battlecard","f":"先研究竞品定位、内容策略与市场存在；再对比信息与内容；最后输出 battlecard 与应对策略。","i":413,"u":"https://www.skills.sh/anthropics/knowledge-work-plugins/competitive-analysis","r":"anthropics/knowledge-work-plugins","s":23329,"p":"2026-08-06","a":"pass"},
+  {"n":"competitive-analysis-process","cats":["ind"],"d":"六步完整竞品研究流程，从竞争格局到战略方向","f":"先按六步流程从竞争格局开始梳理；再逐层深入竞品与定位；最后落到战略方向建议。","i":181,"u":"https://www.skills.sh/deanpeters/product-manager-skills/competitive-analysis-process","r":"deanpeters/product-manager-skills","s":6273,"p":"2026-07-17","a":"pass"},
+  {"n":"conducting-user-interviews","cats":["q"],"d":"访谈规划、提纲、追问、避免诱导及访谈后综合","f":"先明确访谈目标与招募对象，起草提纲；再执行访谈并记录原话；最后针对回放做综合，提炼证据与洞察。","i":1788,"u":"https://www.skills.sh/refoundai/lenny-skills/conducting-user-interviews","r":"refoundai/lenny-skills","s":1220,"p":"2026-07-16","a":"pass+warn"},
+  {"n":"customer-discovery","cats":["q"],"d":"用 Steve Blank Customer Development 系统验证商业假设","f":"先列出待验证假设与关键问题；再设计访谈/客户对话并执行；最后用证据更新假设与商业模式判断。","i":243,"u":"https://www.skills.sh/guia-matthieu/clawfu-skills/customer-discovery","r":"guia-matthieu/clawfu-skills","s":145,"p":"2026-04-02","a":"pass"},
+  {"n":"user-research-cookiy","cats":["q","qt"],"d":"覆盖计划、招募、访谈、问卷、AI 访谈与综合的端到端用研助手","f":"先按研究目标做研究计划与讨论提纲；再进入招募、AI 访谈或问卷收集；最后汇总原始数据做定性/定量综合并输出报告。","i":222,"u":"https://www.skills.sh/cookiy-ai/user-research-skill/user-research-cookiy","r":"cookiy-ai/user-research-skill","s":1552,"p":"2026-08-03","a":"pass+warn"},
+  {"n":"product-discovery","cats":["q"],"d":"用 Marty Cagan 框架验证价值、可用性、可行性和商业可行性","f":"先拆解产品假设与风险最高的问题；再通过访谈/原型验证价值与可用性；最后形成可执行的产品方向结论。","i":169,"u":"https://www.skills.sh/guia-matthieu/clawfu-skills/product-discovery","r":"guia-matthieu/clawfu-skills","s":145,"p":"2026-04-02","a":"pass"},
+  {"n":"planning-user-interviews","cats":["q"],"d":"在 PostHog 中定义受访人群、访谈主题和问题，并衔接 voice-agent","f":"先选择目标人群（cohort/邮箱/用户 ID）；再起草访谈主题与问题；最后在 PostHog 中配置 voice-agent 并排期。","i":165,"u":"https://www.skills.sh/posthog/skills/planning-user-interviews","r":"posthog/skills","s":58,"p":"2026-08-05","a":"pass"},
+  {"n":"user-interview","cats":["q"],"d":"设计能够获得真实行为证据、避免确认偏误的用户访谈","f":"先定义访谈目的与待验证线索，设计避免诱导的提纲；再执行访谈并捕捉行为证据；最后综合证据判断真实需求。","i":160,"u":"https://www.skills.sh/assimovt/productskills/user-interview","r":"assimovt/productskills","s":54,"p":"2026-02-18","a":"pass"},
+  {"n":"ux-research","cats":["q","usa"],"d":"研究规划、招募、访谈、可用性测试、旅程图和实验设计","f":"先规划研究目标与方法组合；再执行访谈/可用性测试/问卷等；最后用旅程图与综合报告转成设计输入。","i":152,"u":"https://www.skills.sh/absolutelyskilled/absolutelyskilled/ux-research","r":"absolutelyskilled/absolutelyskilled","s":205,"p":"2026-07-06","a":"pass"},
+  {"n":"ux-research","cats":["q","usa"],"d":"计划、执行和分析 UX 研究，含脚本、测试计划和招募","f":"先写访谈脚本与招募标准；再执行测试与访谈；最后分析数据并输出研究结论。","i":151,"u":"https://www.skills.sh/cuellarfr/design-skills/ux-research","r":"cuellarfr/design-skills","s":47,"p":"2026-07-06","a":"pass"},
+  {"n":"ux-research","cats":["q","usa"],"d":"研究计划、招募、访谈、定性综合及产品决策转译","f":"先做研究计划与招募；再执行访谈并整理定性材料；最后把发现转译成产品决策建议。","i":136,"u":"https://www.skills.sh/rampstackco/claude-skills/ux-research","r":"rampstackco/claude-skills","s":518,"p":"2026-08-05","a":"pass"},
+  {"n":"gr-user-interview","cats":["q"],"d":"中文访谈框架：招募、问题设计、执行、综合和决策驱动","f":"先按中文框架规划招募与问题设计；再执行访谈并同步整理数据；最后综合为决策依据。","i":130,"u":"https://www.skills.sh/gingiris-1031/gingiris-skills/gr-user-interview","r":"gingiris-1031/gingiris-skills","s":66,"p":"2026-08-04","a":"pass"},
+  {"n":"focus-group","cats":["q"],"d":"焦点小组设计与主持，偏消费者/营销研究","f":"先设计焦点小组主题、提纲与招募；再主持讨论并记录；最后汇总观点与分歧，输出洞察。","i":99,"u":"https://www.skills.sh/indranilbanerjee/digital-marketing-pro/focus-group","r":"indranilbanerjee/digital-marketing-pro","s":709,"p":"2026-08-01","a":"pass"},
+  {"n":"participant-operations-hub","cats":["q"],"d":"研究参与者招募、排期、知情同意和激励发放的流程与护栏","f":"先制定招募标准与配额；再处理排期、知情同意与激励；最后核对完成情况与数据合规。","i":61,"u":"https://www.skills.sh/gtmagents/gtm-agents/participant-operations-hub","r":"gtmagents/gtm-agents","s":365,"p":"2026-04-03","a":"pass"},
+  {"n":"ux-research-plan","cats":["q","usa"],"d":"根据产品问题生成研究目标、方法、样本、提纲和分析计划","f":"先明确产品问题与研究目标；再设计方法、样本与提纲；最后输出完整的研究计划文档。","i":49,"u":"https://www.skills.sh/mohitagw15856/pm-claude-skills/ux-research-plan","r":"mohitagw15856/pm-claude-skills","s":1259,"p":"2026-08-05","a":"pass"},
+  {"n":"soc-user-research","cats":["q"],"d":"访谈、焦点小组、问卷和田野观察的基础用研方法","f":"先确定研究问题与适选方法（访谈/焦点小组/问卷/观察）；再执行并记录；最后综合发现。","i":27,"u":"https://www.skills.sh/asgard-ai-platform/skills/soc-user-research","r":"asgard-ai-platform/skills","s":223,"p":"2026-06-06","a":"pass"},
+  {"n":"atypica-user-interview","cats":["q"],"d":"调用 Atypica 合成人群做 AI 模拟访谈/焦点小组，只能用于预演","f":"先选择目标 persona 与访谈场景；再调用 Atypica 合成人群做模拟访谈；最后把模拟结果用于预演与问卷打磨。","i":12,"u":"https://www.skills.sh/atypica-ai/marketing-skills/atypica-user-interview","r":"atypica-ai/marketing-skills","s":43,"p":"2026-03-26","a":"pass"},
+  {"n":"user-research-techniques","cats":["q","qt"],"d":"访谈、可用性、问卷和分析方法的轻量选择指南","f":"先明确决策问题与约束；再按方法库选择访谈/问卷/可用性/分析；最后给出方法建议与执行要点。","i":11,"u":"https://www.skills.sh/slgoodrich/agents/user-research-techniques","r":"slgoodrich/agents","s":121,"p":"2026-04-10","a":"pass"},
+  {"n":"designing-surveys","cats":["qt"],"d":"客户调查、NPS、PMF 调查、题目措辞和反馈收集设计","f":"先明确调查目的与目标人群，设计题目与选项措辞；再检查偏差与测试流程；最后输出可发布的问卷。","i":1859,"u":"https://www.skills.sh/refoundai/lenny-skills/designing-surveys","r":"refoundai/lenny-skills","s":1220,"p":"2026-07-16","a":"pass+warn"},
+  {"n":"usability-testing","cats":["usa"],"d":"原型/产品可用性测试规划、主持、观察和结论整理","f":"先确定测试目标与任务场景；再设计任务脚本并招募参与者；执行测试并观察后归纳问题，最后输出改进建议。","i":1795,"u":"https://www.skills.sh/refoundai/lenny-skills/usability-testing","r":"refoundai/lenny-skills","s":1220,"p":"2026-07-16","a":"pass+warn"},
+  {"n":"usability-test-plan","cats":["usa"],"d":"生成包含任务、成功指标、参与者标准和主持指南的测试计划","f":"先明确测试目标与场景；再定义任务、成功指标、参与标准与主持要点；最后输出完整测试计划。","i":1020,"u":"https://www.skills.sh/owl-listener/designer-skills/usability-test-plan","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"card-sort-analysis","cats":["usa"],"d":"分析开放式/封闭式卡片分类结果，支持信息架构设计","f":"先准备卡片集并选择开/闭环方式；再收集与清理数据；最后分析相似度/聚类并输出信息架构建议。","i":1000,"u":"https://www.skills.sh/owl-listener/designer-skills/card-sort-analysis","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"diary-study-plan","cats":["q"],"d":"日记研究的提示语、周期、样本标准和分析框架","f":"先定义研究周期与提示问题；再设定参与者与日记提交节奏；最后按分析框架整理周期内的行为与感受变化。","i":999,"u":"https://www.skills.sh/owl-listener/designer-skills/diary-study-plan","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"survey-design","cats":["qt"],"d":"设计可靠、低偏差的定量问卷，用于验证假设和测量态度","f":"先定义假设与测量目标；再设计题项、量级与防偏差机制；最后输出可投放的问卷。","i":635,"u":"https://www.skills.sh/owl-listener/designer-skills/survey-design","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"measure-survey-analysis","cats":["qt","txt","viz","ins"],"d":"将问卷结果转成细分、假设验证、开放题主题和产品行动","f":"先清洗与整理问卷数据；再按细分、假设与开放题主题做分析；最后输出可视化与产品行动建议。","i":383,"u":"https://www.skills.sh/product-on-purpose/pm-skills/measure-survey-analysis","r":"product-on-purpose/pm-skills","s":519,"p":"2026-08-04","a":"pass"},
+  {"n":"usability-testing","cats":["usa"],"d":"现有产品或原型的测试设计、任务脚本、主持、观察和综合","f":"先设计测试与任务脚本；再主持测试并观察；最后输出问题清单与改进建议。","i":130,"u":"https://www.skills.sh/rampstackco/claude-skills/usability-testing","r":"rampstackco/claude-skills","s":518,"p":"2026-08-05","a":"pass"},
+  {"n":"alterlab-survey-design","cats":["qt"],"d":"问卷结构、Likert 量表、题型、偏差控制和测量工具设计","f":"先明确构念与量表目标；再设计题项类型与 Likert 尺度；最后做信度效度检查与问卷定稿。","i":58,"u":"https://www.skills.sh/alterlab-ieu/alterlab-academic-skills/alterlab-survey-design","r":"alterlab-ieu/alterlab-academic-skills","s":57,"p":"2026-07-03","a":"pass"},
+  {"n":"pm-survey-designer","cats":["qt"],"d":"中文问卷生成器，支持用户调研、满意度、NPS、市场/需求调研","f":"先输入调研目标与人群；再生成题项与逻辑（满意度/NPS/市场/需求等）；最后输出可发布问卷。","i":35,"u":"https://www.skills.sh/zephyrwang6/pm-skills/pm-survey-designer","r":"zephyrwang6/pm-skills","s":869,"p":"2026-07-09","a":"pass"},
+  {"n":"research-synthesis","cats":["ins","q"],"d":"将访谈、问卷、可用性笔记和支持记录综合成主题、证据与建议","f":"先收集散落的访谈、问卷、测试笔记与支持记录；再按主题聚类并核对证据强度；最后输出洞察、建议与证据索引。","i":2932,"u":"https://www.skills.sh/anthropics/knowledge-work-plugins/research-synthesis","r":"anthropics/knowledge-work-plugins","s":23329,"p":"2026-08-06","a":"pass"},
+  {"n":"user-personas","cats":["q","ins"],"d":"从研究数据构建含 JTBD、痛点、收益与意外洞察的 Persona","f":"先整理研究数据与证据；再按细分提炼 3 个 persona，标注 JTBD、痛点、收益与意外发现；最后输出可分享的 persona 文档。","i":2065,"u":"https://www.skills.sh/phuryn/pm-skills/user-personas","r":"phuryn/pm-skills","s":24900,"p":"2026-07-03","a":"pass"},
+  {"n":"user-persona","cats":["q","ins"],"d":"从研究数据总结目标、挫折和行为模式","f":"先汇集研究材料；再归纳人口特征、目标、挫折与行为；最后输出单视角 persona 描述。","i":1009,"u":"https://www.skills.sh/owl-listener/designer-skills/user-persona","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"jobs-to-be-done","cats":["q","ins"],"d":"梳理功能、情绪、社会三层 Job 及期望结果","f":"先梳理用户场景与决策点；再划分功能/情绪/社会三层 Job 与期望结果；最后输出 JTBD 地图。","i":1004,"u":"https://www.skills.sh/owl-listener/designer-skills/jobs-to-be-done","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"replay-ux-research","cats":["usa","viz"],"d":"从 Sentry Session Replay 中发现路径、摩擦和 UX 模式","f":"先定位目标产品区域与时间段；再回放 Session Replay 提取路径与摩擦点；最后按模式归纳 UX 问题与建议。","i":734,"u":"https://www.skills.sh/getsentry/skills/replay-ux-research","r":"getsentry/skills","s":900,"p":"2026-08-03","a":"pass+warn"},
+  {"n":"product-review-analysis","cats":["txt","qt"],"d":"从电商评论中抽取痛点、表扬、功能诉求和情绪趋势","f":"先抓取/整理目标产品评论；再按痛点、表扬、功能诉求与情感做标注；最后输出趋势与改进优先级。","i":714,"u":"https://www.skills.sh/nexscope-ai/ecommerce-skills/product-review-analysis","r":"nexscope-ai/ecommerce-skills","s":596,"p":"2026-07-23","a":"pass"},
+  {"n":"research-repository","cats":["ins"],"d":"建设可查找、可复用、可累积的研究资料库","f":"先盘点现有研究材料与缺口；再建立模板、标签与检索结构；最后沉淀为可复用资料库并持续维护。","i":623,"u":"https://www.skills.sh/owl-listener/designer-skills/research-repository","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"user-research-analysis","cats":["ins","q","txt"],"d":"综合定性与定量用研，识别模式并支持设计决策","f":"先汇集定性与定量数据；再交叉分析识别模式；最后输出洞察并支持设计决策。","i":552,"u":"https://www.skills.sh/aj-geddes/useful-ai-prompts/user-research-analysis","r":"aj-geddes/useful-ai-prompts","s":305,"p":"2026-03-04","a":"pass"},
+  {"n":"define-jtbd-canvas","cats":["q","ins"],"d":"生成涵盖功能、情绪和社会维度的 JTBD Canvas","f":"先明确用户与使用场景；再拆解功能/情绪/社会三层 Job 与障碍；最后输出完整 JTBD Canvas。","i":516,"u":"https://www.skills.sh/product-on-purpose/pm-skills/define-jtbd-canvas","r":"product-on-purpose/pm-skills","s":519,"p":"2026-08-04","a":"pass"},
+  {"n":"user-research-synthesis","top":true,"cats":["ins","q"],"d":"将定性和定量用研转成结构化洞察与机会区","f":"先整理访谈、问卷等原始材料；再聚类成主题与机会区；最后输出结构化的综合报告。","i":416,"u":"https://www.skills.sh/anthropics/knowledge-work-plugins/user-research-synthesis","r":"anthropics/knowledge-work-plugins","s":23329,"p":"2026-08-06","a":"pass+warn"},
+  {"n":"voice-of-customer-miner","cats":["txt","q","ins"],"d":"从评论、应用商店和论坛挖掘未满足需求、竞品弱点与切换触发点","f":"先在评论/应用商店/论坛定位高信号内容；再按主题抽取原话证据；最后输出需求、竞品弱点与触发点清单。","i":182,"u":"https://www.skills.sh/deanpeters/product-manager-skills/voice-of-customer-miner","r":"deanpeters/product-manager-skills","s":6273,"p":"2026-07-17","a":"pass"},
+  {"n":"research-synthesis","cats":["ins","q"],"d":"用 atomic research 方法把研究材料综合成可执行洞察","f":"先聚合研究原子素材；再按主题与证据聚类；最后输出可执行的洞察与行动。","i":159,"u":"https://www.skills.sh/assimovt/productskills/research-synthesis","r":"assimovt/productskills","s":54,"p":"2026-02-18","a":"pass"},
+  {"n":"thinking-jobs-to-be-done","cats":["q","ins"],"d":"从采用/流失问题中找出用户雇佣产品要取得的进展","f":"先还原用户“雇佣”产品的场景与进展；再按结果与竞争方案排序；最后输出 JTBD 判断。","i":135,"u":"https://www.skills.sh/tjboudreaux/cc-thinking-skills/thinking-jobs-to-be-done","r":"tjboudreaux/cc-thinking-skills","s":933,"p":"2026-08-05","a":"pass"},
+  {"n":"discovery-research-synthesis","cats":["ins","q"],"d":"把访谈、工单、销售通话、问卷等转成 PM 可用洞察","f":"先汇集访谈、工单、销售记录等材料；再聚类主题与证据；最后输出 PM 可用的洞察与行动。","i":124,"u":"https://www.skills.sh/rampstackco/claude-skills/discovery-research-synthesis","r":"rampstackco/claude-skills","s":518,"p":"2026-08-05","a":"pass"},
+  {"n":"user-research-synthesis","cats":["ins","q"],"d":"将访谈、问卷和用研材料整理为主题、证据和行动建议","f":"先整理访谈与问卷材料；再归纳主题与证据；最后输出结构化洞察文档。","i":62,"u":"https://www.skills.sh/mohitagw15856/pm-claude-skills/user-research-synthesis","r":"mohitagw15856/pm-claude-skills","s":1259,"p":"2026-08-05","a":"pass"},
+  {"n":"research-synthesis","cats":["ins","q"],"d":"生成洞察、Persona、机会、主题和优先行动","f":"先汇集研究材料；再提炼主题、Persona 与机会；最后输出排序后的行动建议。","i":46,"u":"https://www.skills.sh/vm0-ai/vm0-skills/research-synthesis","r":"vm0-ai/vm0-skills","s":76,"p":"2026-07-06","a":"pass"},
+  {"n":"customer-feedback-analysis","cats":["txt","qt"],"d":"分析 NPS、CSAT 与开放反馈，提取主题、趋势和行动建议","f":"先汇集 NPS、CSAT 与开放反馈；再提炼主题与趋势；最后输出洞察报告与改进项。","i":20,"u":"https://www.skills.sh/seb1n/awesome-ai-agent-skills/customer-feedback-analysis","r":"seb1n/awesome-ai-agent-skills","s":144,"p":"2026-03-02","a":"pass"},
+  {"n":"competitive-analysis","cats":["ind"],"d":"系统对比竞品功能、价格、定位与市场策略，生成竞争情报","f":"先收集竞品页面与公开信息；再按维度对比功能/价格/定位；最后输出竞争情报报告。","i":4065,"u":"https://www.skills.sh/claude-office-skills/skills/competitive-analysis","r":"claude-office-skills/skills","s":361,"p":"2026-01-31","a":"","risk":"维护风险：仓库最近一次更新在 2026-01-31，已超过 6 个月未更新；skills.sh 暂无自动安全审计记录。适合参考，安装前请自查仓库与脚本。"},
+  {"n":"software-ux-research","cats":["q","usa"],"d":"覆盖用户研究方法与研究运营，含访谈、可用性测试、问卷与 AB 测试，用于降低产品决策风险","f":"先选择方法与研究流程（访谈/可用性/问卷/AB 测试）；再执行并记录原始数据；最后综合结论以支持产品决策。","i":175,"u":"https://www.skills.sh/vasilyu1983/ai-agents-public/software-ux-research","r":"vasilyu1983/ai-agents-public","s":73,"p":"2026-07-13","a":"pass+warn+fail","risk":"安全审计含 Fail：Runlayer 判定 HIGH（1 个文件被标记），Snyk 提示 MEDIUM。安装前请先通读脚本与依赖，评估风险后再决定。"},
+  {"n":"customer-research","cats":["q","qt"],"d":"覆盖问卷设计、访谈提纲、NPS 深挖与行为数据解读，偏用户侧客户研究","f":"先按研究目标设计问卷/访谈并收集数据；再分析 NPS 与行为数据；最后综合输出洞察。","i":130,"u":"https://www.skills.sh/absolutelyskilled/absolutelyskilled/customer-research","r":"absolutelyskilled/absolutelyskilled","s":205,"p":"2026-07-06","a":"pass+warn+fail","risk":"安全审计含 Fail：Snyk 判定 CRITICAL（1 个问题），Socket 提示 gptAnomaly。风险等级高，建议先通读代码再谨慎安装。"},
+  {"n":"user-interview-synthesis","cats":["q","ins"],"d":"把用户访谈逐字稿综合成结构化研究结论","f":"先把访谈逐字稿结构化拆分；再按主题编码与综合；最后输出研究结论。","i":50,"u":"https://www.skills.sh/mohitagw15856/pm-claude-skills/user-interview-synthesis","r":"mohitagw15856/pm-claude-skills","s":1259,"p":"2026-08-05","a":"pass+fail","risk":"安全审计含 Fail：Snyk 判定 HIGH（1 个问题）。安装前请先通读脚本与依赖，评估风险后再决定。"},
+  {"n":"byted-airesearch-survey","cats":["q","qt"],"d":"火山引擎 AI 研究问卷工作流：概念测试、受众设计、问卷草拟与访谈提纲生成","f":"先设计概念测试与受众方案；再生成问卷与访谈提纲并执行；最后汇总发现。","i":20,"u":"https://www.skills.sh/bytedance/agentkit-samples/byted-airesearch-survey","r":"bytedance/agentkit-samples","s":411,"p":"2026-08-05","a":"pass+warn+fail","risk":"安全审计含 Fail：Snyk 判定 HIGH（2 个问题）。安装前请先通读脚本与依赖，评估风险后再决定。"},
+  {"n":"jtbd-analyzer","self":true,"cats":["q","txt","ins"],"d":"基于 JTBD 框架对访谈文本、访谈笔记或用户反馈做结构化分析，输出 Job Statements、情境卡片与设计建议","f":"先收集访谈文本/笔记并确认研究目标；再按 JTBD 编码提取 Job Statements、情境与触发因素；最后输出结构化分析报告与设计建议。","i":0,"u":"https://github.com/huangzhenhao90/jtbd-skills","r":"huangzhenhao90/jtbd-skills","s":6,"p":"2026-04-15"},
+  {"n":"jtbd-interview-guide","self":true,"cats":["q"],"d":"基于 JTBD（Christensen 经典框架 + Competing Against Luck）生成高质量用户访谈提纲，挖出真实 job 而非表面态度","f":"先确认研究对象、目标用户与研究问题；再按 JTBD 设计访谈问题与追问路径；最后输出可直接使用的访谈提纲。","i":0,"u":"https://github.com/huangzhenhao90/jtbd-skills","r":"huangzhenhao90/jtbd-skills","s":6,"p":"2026-04-15"},
+  {"n":"survey-data-analysis","self":true,"cats":["qt","viz"],"d":"问卷调研数据分析全链路：CSV/XLSX/SPSS 加载、量表归一化、清洗、频率/交叉、显著性检验、回归与 IPA、分群、ML 建模及市研专题（PSM/Conjoint/Kano/TURF/品牌漏斗）","f":"先加载数据并识别题型、归一化量表；再做样本质量清洗与描述统计；随后按需进行显著性检验、驱动因素、分群或市研专题分析；最后输出结论与图表。","i":0,"u":"https://github.com/huangzhenhao90/survey_data_analysis","r":"huangzhenhao90/survey_data_analysis","s":5,"p":"2026-04-27"},
+  {"n":"data-visualization","self":true,"cats":["viz"],"d":"按数据类型智能选图并生成专业 matplotlib 可视化代码，内置 BCG / The Economist / McKinsey 三套报告风格","f":"先确认或选择风格，分析数据类型；再按图表选择规范匹配图表类型，优先参考示例模板；最后输出可直接运行的 Python 可视化代码。","i":0,"u":"https://github.com/huangzhenhao90/data-visualization","r":"huangzhenhao90/data-visualization","s":14,"p":"2026-04-16"},
+  {"n":"claude-svg-charts","self":true,"cats":["viz"],"d":"生成图表、示意图与交互组件，输出独立 SVG 或自包含 HTML，适合研究报告与汇报配图（Claude artifact 风格）","f":"先明确要可视化的内容与形态（图表/流程/看板）；再按 9 色调色板与排版规范生成 SVG 或 HTML；最后输出可直接嵌入或打开的成品。","i":0,"u":"https://github.com/huangzhenhao90/claude-infographic-charts","r":"huangzhenhao90/claude-infographic-charts","s":24,"p":"2026-04-13"},
+  {"n":"interview-analyst","cats":["q","txt","ins"],"d":"按社会学学术方法系统分析访谈文本：先编码、再分析、再做质量检查、再写报告，全过程可回溯可检查","f":"先沉浸式通读转录稿并为每位受访者写 memo；再做系统化编码与主题提炼；随后质量检查；最后输出带过程文档的研究报告。","i":116,"u":"https://www.skills.sh/nealcaren/social-data-analysis/interview-analyst","r":"nealcaren/social-data-analysis","s":78,"p":"2026-01-30","a":"pass","top":true},
+  {"n":"skill-from-masters","cats":["q"],"d":"元技能：生成任何 skill 前先系统挖掘领域顶尖大师方法论（内置访谈提纲等 15+ 领域库），确保生成水准","f":"先把需求 5 层收窄到具体场景；再调用大师方法论数据库并联网交叉验证；随后设计测试用例并生成 skill；最后逐项检验迭代。","i":743,"u":"https://www.skills.sh/GBSOSS/skill-from-masters/skill-from-masters","r":"GBSOSS/skill-from-masters","s":1566,"p":"2026-02-16","a":"pass+warn","top":true}
+]
+</script>
+
+<script>
+
+  var CATS = {
+    q:   { label: "定性研究", color: "#059669", guide: "适合访谈、观察、日记、焦点小组等非数字洞察场景，关注行为、动机与体验细节。" },
+    qt:  { label: "定量研究", color: "#0284c7", guide: "适合问卷、量表、NPS、统计与数字证据场景，关注可达规模与可验证结论。" },
+    ind: { label: "行业研究", color: "#4f46e5", guide: "适合市场规模、细分、竞品与行业情报，输出案头研究与决策依据。" },
+    usa: { label: "可用性测试", color: "#d97706", guide: "适合原型或线上产品的体验评估，产出测试计划、问题清单与改进建议。" },
+    viz: { label: "数据可视化", color: "#db2777", guide: "侧重把研究数据与结果转成图表、看板与可视报告。" },
+    txt: { label: "文本分析", color: "#7c3aed", guide: "侧重开放题、评论、会话与用户原话的语义归纳、编码与主题提取。" },
+    ins: { label: "洞察与汇报", color: "#0d9488", guide: "侧重把研究材料综合成主题、洞察、Persona 与汇报材料。" }
+  };
+  var CAT_ORDER = ["q", "qt", "ind", "usa", "viz", "txt", "ins"];
+  var SKILLS = JSON.parse(document.getElementById("skills-data").textContent);
+  var state = { src: "all", cat: "all", q: "", top: false, sort: "installs-desc" };
+
+  function fmt(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+    return String(n);
+  }
+  function auditClass(a) {
+    if (!a) return "";
+    return a.indexOf("fail") > -1 ? "warn" : (a.indexOf("warn") > -1 ? "warn" : "pass");
+  }
+  function auditLabel(a) {
+    if (!a) return "";
+    if (a.indexOf("fail") > -1) return "含 Fail ⚠";
+    return a.indexOf("warn") > -1 ? "Pass + 提示" : "审计 Pass";
+  }
+  function catCounts() {
+    var counts = {};
+    SKILLS.filter(srcMatch).forEach(function (s) {
+      (s.cats || []).forEach(function (k) { counts[k] = (counts[k] || 0) + 1; });
+    });
+    return counts;
+  }
+
+  function srcMatch(s) {
+    if (state.src === "self") return !!s.self;
+    if (state.src === "third") return !s.self;
+    return true;
+  }
+
+  function renderSidebar() {
+    var counts = catCounts();
+    var wrap = document.getElementById("side-list");
+    var selfCount = SKILLS.filter(function (s) { return s.self; }).length;
+    var html = '<h4>来源</h4>';
+    var srcs = [["all", "全部来源", SKILLS.length, "#94a3b8"], ["self", "真知浩见出品", selfCount, "#047857"], ["third", "第三方公开", SKILLS.length - selfCount, "#4f46e5"]];
+    srcs.forEach(function (item) {
+      html += '<button class="side-item' + (state.src === item[0] ? " active" : "") + '" data-src="' + item[0] + '">' +
+        '<span class="dot" style="background:' + item[3] + '"></span><span>' + item[1] + '</span><span class="count">' + item[2] + "</span></button>";
+    });
+    html += '<h4 style="margin-top:14px">按分类筛选</h4>';
+    var allCount = SKILLS.filter(srcMatch).length;
+    html += '<button class="side-item' + (state.cat === "all" ? " active" : "") + '" data-c="all">' +
+      '<span class="dot" style="background:#94a3b8"></span><span>全部分类</span><span class="count">' + allCount + "</span></button>";
+    CAT_ORDER.forEach(function (k) {
+      html += '<button class="side-item' + (state.cat === k ? " active" : "") + '" data-c="' + k + '">' +
+        '<span class="dot" style="background:' + CATS[k].color + '"></span><span>' + CATS[k].label + '</span><span class="count">' + (counts[k] || 0) + "</span></button>";
+    });
+    wrap.innerHTML = html;
+    var items = wrap.querySelectorAll(".side-item");
+    var i, n = items.length;
+    for (i = 0; i < n; i++) {
+      items[i].addEventListener("click", function () {
+        if (this.hasAttribute("data-src")) {
+          state.src = this.getAttribute("data-src");
+        }
+        if (this.hasAttribute("data-c")) {
+          state.cat = this.getAttribute("data-c");
+        }
+        renderSidebar();
+        render();
+      });
+    }
+  }
+
+  function matches(s) {
+    if (!srcMatch(s)) return false;
+    if (state.cat !== "all" && (s.cats || []).indexOf(state.cat) === -1) return false;
+    if (state.top && !s.top) return false;
+    var q = state.q.trim().toLowerCase();
+    if (q) {
+      var hay = (s.n + " " + s.d + " " + s.r + " " + (s.cats || []).map(function (k) { return CATS[k].label; }).join(" ")).toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+
+  function sortedList() {
+    var list = SKILLS.filter(matches);
+    if (state.sort === "installs-desc") list.sort(function (a, b) { return b.i - a.i; });
+    else if (state.sort === "installs-asc") list.sort(function (a, b) { return a.i - b.i; });
+    else if (state.sort === "stars-desc") list.sort(function (a, b) { return (b.s || 0) - (a.s || 0); });
+    else list.sort(function (a, b) { return a.n.localeCompare(b.n, "zh"); });
+    return list;
+  }
+
+  function render() {
+    var q = state.q.trim().toLowerCase();
+    var list = sortedList();
+    var idxMap = {};
+    list.forEach(function (s, i) { idxMap[s.u] = i; });
+
+    document.getElementById("result-info").textContent = "当前展示 " + list.length + " 个 skill" +
+      (state.src === "self" ? " · 真知浩见出品" : (state.src === "third" ? " · 第三方公开" : "")) +
+      (state.cat !== "all" ? " · " + CATS[state.cat].label : "") +
+      (state.top ? " · 仅重点推荐" : "") +
+      (q ? " · 搜索「" + state.q.trim() + "」" : "");
+
+    var grid = document.getElementById("grid");
+    grid.innerHTML = list.map(function (s) {
+      var audit = auditLabel(s.a);
+      var html = '<div class="card" data-idx="' + idxMap[s.u] + '">';
+      html += '<div class="topline">' + s.cats.map(function (k) {
+        return '<span class="cat" style="background:' + CATS[k].color + '">' + CATS[k].label + "</span>";
+      }).join("") +
+        (s.top ? '<span class="flag">⭐ 重点推荐</span>' : "") +
+        (s.self ? '<span class="flag" style="color:#047857">真知浩见出品</span>' : "") +
+        (s.risk ? '<span class="flag" style="color:#dc2626">⚠ 有风险</span>' : "") + "</div>";
+      html += '<h3>' + s.n + "</h3>";
+      html += '<div class="desc">' + s.d + "</div>";
+      html += '<div class="meta">';
+      html += '<span class="installs">' + (s.self ? "自研 · 未上架" : "⬇ " + fmt(s.i) + " 安装") + "</span>";
+      html += (s.s ? '<span class="stars">★ ' + fmt(s.s) + " Stars</span>" : "");
+      html += '<span>' + s.r + "</span>";
+      html += s.p ? "<span>更新 " + s.p + "</span>" : "";
+      html += audit ? '<span class="audit ' + auditClass(s.a) + '">' + audit + "</span>" : "";
+      html += "</div></div>";
+      return html;
+    }).join("");
+  }
+
+  function byIndex(idx) {
+    return sortedList()[idx];
+  }
+
+  function openModal(idx) {
+    var s = byIndex(idx);
+    if (!s) return;
+    document.getElementById("m-name").textContent = s.n;
+    document.getElementById("m-tags").innerHTML = s.cats.map(function (k) {
+      return '<span class="cat" style="background:' + CATS[k].color + '">' + CATS[k].label + "</span>";
+    }).join("");
+    document.getElementById("m-desc").innerHTML = "<b>概览</b><br>" + s.d;
+    document.getElementById("m-flow").textContent = s.f || "暂无详细流程说明，以 SKILL.md 为准。";
+    document.getElementById("m-guides").innerHTML = s.cats.map(function (k) {
+      return "· <b>" + CATS[k].label + "</b>：" + CATS[k].guide;
+    }).join("<br>");
+    document.getElementById("m-installs").textContent = s.self ? "—" : fmt(s.i);
+    document.getElementById("m-stars").textContent = s.s ? fmt(s.s) : "—";
+    document.getElementById("m-updated").textContent = s.p || "—";
+    document.getElementById("m-audit").textContent = s.self ? "—（自研）" : (auditLabel(s.a) || "—");
+    document.getElementById("m-source").textContent = s.r;
+    var riskBox = document.getElementById("m-risk");
+    if (s.risk) {
+      riskBox.style.display = "block";
+      document.getElementById("m-risk-text").textContent = "风险提示：" + s.risk;
+    } else {
+      riskBox.style.display = "none";
+    }
+    var cmd = "npx skills add " + s.r + "@" + s.n;
+    var prompt = "请帮我安装这个 skill：" + s.u;
+    document.getElementById("m-cmd").textContent = cmd;
+    document.getElementById("m-prompt").textContent = prompt;
+    document.getElementById("m-usage").textContent = "在支持 Agent Skills 的工具（如 Claude Code、Codex、Cursor）中使用/调出「" + s.n + "」，布置任务即可。";
+    document.getElementById("m-skill-link").setAttribute("href", s.u);
+    document.getElementById("m-skill-link").textContent = s.self ? "在 GitHub 查看源码 ↗" : "在 skills.sh 查看详情 ↗";
+    document.getElementById("m-repo-link").setAttribute("href", "https://github.com/" + s.r);
+    resetCopyButton("m-copy", "复制命令");
+    document.getElementById("m-copy").__text = cmd;
+    resetCopyButton("m-copy-prompt", "复制这句话");
+    document.getElementById("m-copy-prompt").__text = prompt;
+    document.getElementById("overlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    document.getElementById("overlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function resetCopyButton(id, label) {
+    var btn = document.getElementById(id);
+    btn.__label = label;
+    btn.textContent = label;
+    btn.classList.remove("copied");
+  }
+  function copyFrom(id) {
+    var btn = document.getElementById(id);
+    var text = btn.__text || "";
+    function done() {
+      btn.textContent = "已复制 ✓";
+      btn.classList.add("copied");
+      setTimeout(function () { resetCopyButton(id, btn.__label || "复制"); }, 1600);
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) { alert("复制失败，请手动选中后复制"); }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else { fallback(); }
+  }
+  document.getElementById("m-copy").addEventListener("click", function () { copyFrom("m-copy"); });
+  document.getElementById("m-copy-prompt").addEventListener("click", function () { copyFrom("m-copy-prompt"); });
+
+  document.getElementById("grid").addEventListener("click", function (e) {
+    var card = e.target.closest("[data-idx]");
+    if (card) openModal(Number(card.getAttribute("data-idx")));
+  });
+  document.getElementById("m-close").addEventListener("click", closeModal);
+  document.getElementById("overlay").addEventListener("click", function (e) {
+    if (e.target.id === "overlay") closeModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModal();
+  });
+
+  document.getElementById("search").addEventListener("input", function (e) {
+    state.q = e.target.value;
+    render();
+  });
+  document.getElementById("topCheck").addEventListener("change", function (e) {
+    state.top = e.target.checked;
+    document.getElementById("toggleTop").classList.toggle("on", e.target.checked);
+    render();
+  });
+  document.getElementById("sort").addEventListener("change", function (e) {
+    state.sort = e.target.value;
+    render();
+  });
+
+  var total = SKILLS.reduce(function (a, s) { return a + s.i; }, 0);
+  document.getElementById("stat-count").textContent = SKILLS.length;
+  document.getElementById("stat-installs").textContent = fmt(total);
+  renderSidebar();
+  render();
+
+</script>
+</body>
+</html>
