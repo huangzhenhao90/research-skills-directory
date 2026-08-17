@@ -124,6 +124,7 @@
 
 
 
+
   .layout { display: flex; gap: 22px; align-items: flex-start; }
   .sidebar {
     flex: 0 0 232px; position: sticky; top: 74px;
@@ -346,7 +347,7 @@
 
 <div class="footer">
   <img src="logo.jpg" alt="真知浩见" class="footer-logo"><b>真知浩见</b> 出品 · 数据截至 2026-08-06 · 安装次数来自 skills.sh 去重统计，GitHub Star / 最近更新来自仓库主页 ·
-  分类与简介为人工整理，安装前请先阅读对应 SKILL.md 与安全审计 · 「重点推荐」为作者在公众号文章中写过/实测过的第三方 skill（真知浩见出品不参与标记）
+  分类与简介为人工整理，安装前请先阅读对应 SKILL.md 与安全审计 · 「重点推荐」为作者精选或公众号文章中写过/实测过的第三方 skill（真知浩见出品不参与标记）
 </div>
 
 <script id="skills-data" type="application/json">
@@ -368,7 +369,7 @@
   {"n":"market-sizing","cats":["ind"],"d":"用明确假设、不确定性和场景估算市场/细分机会规模，官方来源","f":"先明确细分与使用场景，列出明确假设与不确定性；再按场景计算规模区间；最后输出带假设清单与不确定性的估算。","i":18,"u":"https://www.skills.sh/openai/role-specific-plugins/market-sizing","r":"openai/role-specific-plugins","s":483,"p":"2026-07-13","a":"pass+warn"},
   {"n":"competitive-analysis","cats":["ind"],"d":"竞争威胁、定位、替代方案和竞争战役分析","f":"先确定竞品名单与对比维度（产品/价格/定位/消息）；再逐家收集证据并归档；最后输出威胁评估、差异点和应对建议。","i":2675,"u":"https://www.skills.sh/refoundai/lenny-skills/competitive-analysis","r":"refoundai/lenny-skills","s":1220,"p":"2026-07-16","a":"pass"},
   {"n":"competitive-analysis","cats":["ind","ins"],"d":"面向竞争格局演示文稿的定位、竞品深挖、横向比较和战略综合","f":"先梳理竞争格局与市场定位；再对每家竞品做深挖（产品、财务、战略）；最后综合为对比页与战略建议。","i":1350,"u":"https://www.skills.sh/anthropics/financial-services-plugins/competitive-analysis","r":"anthropics/financial-services-plugins","s":34026,"p":"2026-08-04","a":"pass"},
-  {"n":"competitive-analysis","cats":["ind","usa"],"d":"对比竞品 UX 模式、功能、优势和空白，衔接体验设计判断","f":"先选定竞品并列出对比维度；再逐项对比界面与交互模式；最后输出功能差异、优劣势与空白机会。","i":1012,"u":"https://www.skills.sh/owl-listener/designer-skills/competitive-analysis","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"competitive-analysis","top":true,"cats":["ind","usa"],"d":"对比竞品 UX 模式、功能、优势和空白，衔接体验设计判断","f":"先选定竞品并列出对比维度；再逐项对比界面与交互模式；最后输出功能差异、优劣势与空白机会。","i":1012,"u":"https://www.skills.sh/owl-listener/designer-skills/competitive-analysis","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
   {"n":"discover-competitive-analysis","cats":["ind"],"d":"对 3–5 个直接/间接竞品比较功能、价格、定位并生成 2×2 地图","f":"先选择 3–5 个直接/间接竞品；再对比功能、价格与定位；最后生成 2×2 定位图与差异结论。","i":559,"u":"https://www.skills.sh/product-on-purpose/pm-skills/discover-competitive-analysis","r":"product-on-purpose/pm-skills","s":519,"p":"2026-08-04","a":"pass"},
   {"n":"longbridge-competitive-analysis","cats":["ind"],"d":"用五力、同业横评和定位框架研究竞争结构，偏资本市场/公司研究","f":"先建立行业结构与五力框架；再收集同业数据做横评；最后输出竞争结构与重点标的判断。","i":510,"u":"https://www.skills.sh/longbridge/skills/longbridge-competitive-analysis","r":"longbridge/skills","s":46,"p":"2026-07-20","a":"pass"},
   {"n":"strategy-and-competitive-analysis","cats":["ind","ins"],"d":"用 Good Strategy、五力、SWOT、蓝海等框架形成战略判断","f":"先收集市场与竞品证据；再套用 Good Strategy、五力、SWOT、蓝海等框架分析；最后形成战略建议与执行要点。","i":459,"u":"https://www.skills.sh/lyndonkl/claude/strategy-and-competitive-analysis","r":"lyndonkl/claude","s":141,"p":"2026-08-04","a":"pass"},
@@ -403,7 +404,7 @@
   {"n":"research-synthesis","cats":["ins","q"],"d":"将访谈、问卷、可用性笔记和支持记录综合成主题、证据与建议","f":"先收集散落的访谈、问卷、测试笔记与支持记录；再按主题聚类并核对证据强度；最后输出洞察、建议与证据索引。","i":2932,"u":"https://www.skills.sh/anthropics/knowledge-work-plugins/research-synthesis","r":"anthropics/knowledge-work-plugins","s":23329,"p":"2026-08-06","a":"pass"},
   {"n":"user-personas","cats":["q","ins"],"d":"从研究数据构建含 JTBD、痛点、收益与意外洞察的 Persona","f":"先整理研究数据与证据；再按细分提炼 3 个 persona，标注 JTBD、痛点、收益与意外发现；最后输出可分享的 persona 文档。","i":2065,"u":"https://www.skills.sh/phuryn/pm-skills/user-personas","r":"phuryn/pm-skills","s":24900,"p":"2026-07-03","a":"pass"},
   {"n":"user-persona","cats":["q","ins"],"d":"从研究数据总结目标、挫折和行为模式","f":"先汇集研究材料；再归纳人口特征、目标、挫折与行为；最后输出单视角 persona 描述。","i":1009,"u":"https://www.skills.sh/owl-listener/designer-skills/user-persona","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
-  {"n":"jobs-to-be-done","cats":["q","ins"],"d":"梳理功能、情绪、社会三层 Job 及期望结果","f":"先梳理用户场景与决策点；再划分功能/情绪/社会三层 Job 与期望结果；最后输出 JTBD 地图。","i":1004,"u":"https://www.skills.sh/owl-listener/designer-skills/jobs-to-be-done","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
+  {"n":"jobs-to-be-done","top":true,"cats":["q","ins"],"d":"梳理功能、情绪、社会三层 Job 及期望结果","f":"先梳理用户场景与决策点；再划分功能/情绪/社会三层 Job 与期望结果；最后输出 JTBD 地图。","i":1004,"u":"https://www.skills.sh/owl-listener/designer-skills/jobs-to-be-done","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
   {"n":"replay-ux-research","cats":["usa","viz"],"d":"从 Sentry Session Replay 中发现路径、摩擦和 UX 模式","f":"先定位目标产品区域与时间段；再回放 Session Replay 提取路径与摩擦点；最后按模式归纳 UX 问题与建议。","i":734,"u":"https://www.skills.sh/getsentry/skills/replay-ux-research","r":"getsentry/skills","s":900,"p":"2026-08-03","a":"pass+warn"},
   {"n":"product-review-analysis","cats":["txt","qt"],"d":"从电商评论中抽取痛点、表扬、功能诉求和情绪趋势","f":"先抓取/整理目标产品评论；再按痛点、表扬、功能诉求与情感做标注；最后输出趋势与改进优先级。","i":714,"u":"https://www.skills.sh/nexscope-ai/ecommerce-skills/product-review-analysis","r":"nexscope-ai/ecommerce-skills","s":596,"p":"2026-07-23","a":"pass"},
   {"n":"research-repository","cats":["ins"],"d":"建设可查找、可复用、可累积的研究资料库","f":"先盘点现有研究材料与缺口；再建立模板、标签与检索结构；最后沉淀为可复用资料库并持续维护。","i":623,"u":"https://www.skills.sh/owl-listener/designer-skills/research-repository","r":"owl-listener/designer-skills","s":1976,"p":"2026-06-14","a":"pass"},
@@ -556,7 +557,7 @@
       html += '<h3>' + s.n + "</h3>";
       html += '<div class="desc">' + s.d + "</div>";
       html += '<div class="meta">';
-      html += '<span class="installs">' + (s.self ? "自研 · 未上架" : "⬇ " + fmt(s.i) + " 安装") + "</span>";
+      html += s.self ? "" : '<span class="installs">⬇ ' + fmt(s.i) + " 安装</span>";
       html += (s.s ? '<span class="stars">★ ' + fmt(s.s) + " Stars</span>" : "");
       html += '<span>' + s.r + "</span>";
       html += s.p ? "<span>更新 " + s.p + "</span>" : "";
