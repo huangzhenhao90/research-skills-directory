@@ -125,6 +125,7 @@
 
 
 
+
   .layout { display: flex; gap: 22px; align-items: flex-start; }
   .sidebar {
     flex: 0 0 232px; position: sticky; top: 74px;
@@ -347,7 +348,7 @@
 
 <div class="footer">
   <img src="logo.jpg" alt="真知浩见" class="footer-logo"><b>真知浩见</b> 出品 · 数据截至 2026-08-06 · 安装次数来自 skills.sh 去重统计，GitHub Star / 最近更新来自仓库主页 ·
-  分类与简介为人工整理，安装前请先阅读对应 SKILL.md 与安全审计 · 「重点推荐」为作者精选或公众号文章中写过/实测过的第三方 skill（真知浩见出品不参与标记）
+  分类与简介为人工整理，安装前请先阅读对应 SKILL.md 与安全审计 · 「重点推荐」为作者精选或公众号文章中写过/实测过的 skill（含「真知浩见出品」）
 </div>
 
 <script id="skills-data" type="application/json">
@@ -423,11 +424,11 @@
   {"n":"customer-research","cats":["q","qt"],"d":"覆盖问卷设计、访谈提纲、NPS 深挖与行为数据解读，偏用户侧客户研究","f":"先按研究目标设计问卷/访谈并收集数据；再分析 NPS 与行为数据；最后综合输出洞察。","i":130,"u":"https://www.skills.sh/absolutelyskilled/absolutelyskilled/customer-research","r":"absolutelyskilled/absolutelyskilled","s":205,"p":"2026-07-06","a":"pass+warn+fail","risk":"安全审计含 Fail：Snyk 判定 CRITICAL（1 个问题），Socket 提示 gptAnomaly。风险等级高，建议先通读代码再谨慎安装。"},
   {"n":"user-interview-synthesis","cats":["q","ins"],"d":"把用户访谈逐字稿综合成结构化研究结论","f":"先把访谈逐字稿结构化拆分；再按主题编码与综合；最后输出研究结论。","i":50,"u":"https://www.skills.sh/mohitagw15856/pm-claude-skills/user-interview-synthesis","r":"mohitagw15856/pm-claude-skills","s":1259,"p":"2026-08-05","a":"pass+fail","risk":"安全审计含 Fail：Snyk 判定 HIGH（1 个问题）。安装前请先通读脚本与依赖，评估风险后再决定。"},
   {"n":"byted-airesearch-survey","cats":["q","qt"],"d":"火山引擎 AI 研究问卷工作流：概念测试、受众设计、问卷草拟与访谈提纲生成","f":"先设计概念测试与受众方案；再生成问卷与访谈提纲并执行；最后汇总发现。","i":20,"u":"https://www.skills.sh/bytedance/agentkit-samples/byted-airesearch-survey","r":"bytedance/agentkit-samples","s":411,"p":"2026-08-05","a":"pass+warn+fail","risk":"安全审计含 Fail：Snyk 判定 HIGH（2 个问题）。安装前请先通读脚本与依赖，评估风险后再决定。"},
-  {"n":"jtbd-analyzer","self":true,"cats":["q","txt","ins"],"d":"基于 JTBD 框架对访谈文本、访谈笔记或用户反馈做结构化分析，输出 Job Statements、情境卡片与设计建议","f":"先收集访谈文本/笔记并确认研究目标；再按 JTBD 编码提取 Job Statements、情境与触发因素；最后输出结构化分析报告与设计建议。","i":0,"u":"https://github.com/huangzhenhao90/jtbd-skills","r":"huangzhenhao90/jtbd-skills","s":6,"p":"2026-04-15"},
-  {"n":"jtbd-interview-guide","self":true,"cats":["q"],"d":"基于 JTBD（Christensen 经典框架 + Competing Against Luck）生成高质量用户访谈提纲，挖出真实 job 而非表面态度","f":"先确认研究对象、目标用户与研究问题；再按 JTBD 设计访谈问题与追问路径；最后输出可直接使用的访谈提纲。","i":0,"u":"https://github.com/huangzhenhao90/jtbd-skills","r":"huangzhenhao90/jtbd-skills","s":6,"p":"2026-04-15"},
-  {"n":"survey-data-analysis","self":true,"cats":["qt","viz"],"d":"问卷调研数据分析全链路：CSV/XLSX/SPSS 加载、量表归一化、清洗、频率/交叉、显著性检验、回归与 IPA、分群、ML 建模及市研专题（PSM/Conjoint/Kano/TURF/品牌漏斗）","f":"先加载数据并识别题型、归一化量表；再做样本质量清洗与描述统计；随后按需进行显著性检验、驱动因素、分群或市研专题分析；最后输出结论与图表。","i":0,"u":"https://github.com/huangzhenhao90/survey_data_analysis","r":"huangzhenhao90/survey_data_analysis","s":5,"p":"2026-04-27"},
-  {"n":"data-visualization","self":true,"cats":["viz"],"d":"按数据类型智能选图并生成专业 matplotlib 可视化代码，内置 BCG / The Economist / McKinsey 三套报告风格","f":"先确认或选择风格，分析数据类型；再按图表选择规范匹配图表类型，优先参考示例模板；最后输出可直接运行的 Python 可视化代码。","i":0,"u":"https://github.com/huangzhenhao90/data-visualization","r":"huangzhenhao90/data-visualization","s":14,"p":"2026-04-16"},
-  {"n":"claude-svg-charts","self":true,"cats":["viz"],"d":"生成图表、示意图与交互组件，输出独立 SVG 或自包含 HTML，适合研究报告与汇报配图（Claude artifact 风格）","f":"先明确要可视化的内容与形态（图表/流程/看板）；再按 9 色调色板与排版规范生成 SVG 或 HTML；最后输出可直接嵌入或打开的成品。","i":0,"u":"https://github.com/huangzhenhao90/claude-infographic-charts","r":"huangzhenhao90/claude-infographic-charts","s":24,"p":"2026-04-13"},
+  {"n":"jtbd-analyzer","top":true,"self":true,"cats":["q","txt","ins"],"d":"基于 JTBD 框架对访谈文本、访谈笔记或用户反馈做结构化分析，输出 Job Statements、情境卡片与设计建议","f":"先收集访谈文本/笔记并确认研究目标；再按 JTBD 编码提取 Job Statements、情境与触发因素；最后输出结构化分析报告与设计建议。","i":0,"u":"https://github.com/huangzhenhao90/jtbd-skills","r":"huangzhenhao90/jtbd-skills","s":6,"p":"2026-04-15"},
+  {"n":"jtbd-interview-guide","top":true,"self":true,"cats":["q"],"d":"基于 JTBD（Christensen 经典框架 + Competing Against Luck）生成高质量用户访谈提纲，挖出真实 job 而非表面态度","f":"先确认研究对象、目标用户与研究问题；再按 JTBD 设计访谈问题与追问路径；最后输出可直接使用的访谈提纲。","i":0,"u":"https://github.com/huangzhenhao90/jtbd-skills","r":"huangzhenhao90/jtbd-skills","s":6,"p":"2026-04-15"},
+  {"n":"survey-data-analysis","top":true,"self":true,"cats":["qt","viz"],"d":"问卷调研数据分析全链路：CSV/XLSX/SPSS 加载、量表归一化、清洗、频率/交叉、显著性检验、回归与 IPA、分群、ML 建模及市研专题（PSM/Conjoint/Kano/TURF/品牌漏斗）","f":"先加载数据并识别题型、归一化量表；再做样本质量清洗与描述统计；随后按需进行显著性检验、驱动因素、分群或市研专题分析；最后输出结论与图表。","i":0,"u":"https://github.com/huangzhenhao90/survey_data_analysis","r":"huangzhenhao90/survey_data_analysis","s":5,"p":"2026-04-27"},
+  {"n":"data-visualization","top":true,"self":true,"cats":["viz"],"d":"按数据类型智能选图并生成专业 matplotlib 可视化代码，内置 BCG / The Economist / McKinsey 三套报告风格","f":"先确认或选择风格，分析数据类型；再按图表选择规范匹配图表类型，优先参考示例模板；最后输出可直接运行的 Python 可视化代码。","i":0,"u":"https://github.com/huangzhenhao90/data-visualization","r":"huangzhenhao90/data-visualization","s":14,"p":"2026-04-16"},
+  {"n":"claude-svg-charts","top":true,"self":true,"cats":["viz"],"d":"生成图表、示意图与交互组件，输出独立 SVG 或自包含 HTML，适合研究报告与汇报配图（Claude artifact 风格）","f":"先明确要可视化的内容与形态（图表/流程/看板）；再按 9 色调色板与排版规范生成 SVG 或 HTML；最后输出可直接嵌入或打开的成品。","i":0,"u":"https://github.com/huangzhenhao90/claude-infographic-charts","r":"huangzhenhao90/claude-infographic-charts","s":24,"p":"2026-04-13"},
   {"n":"interview-analyst","cats":["q","txt","ins"],"d":"按社会学学术方法系统分析访谈文本：先编码、再分析、再做质量检查、再写报告，全过程可回溯可检查","f":"先沉浸式通读转录稿并为每位受访者写 memo；再做系统化编码与主题提炼；随后质量检查；最后输出带过程文档的研究报告。","i":116,"u":"https://www.skills.sh/nealcaren/social-data-analysis/interview-analyst","r":"nealcaren/social-data-analysis","s":78,"p":"2026-01-30","a":"pass","top":true},
   {"n":"skill-from-masters","cats":["q"],"d":"元技能：生成任何 skill 前先系统挖掘领域顶尖大师方法论（内置访谈提纲等 15+ 领域库），确保生成水准","f":"先把需求 5 层收窄到具体场景；再调用大师方法论数据库并联网交叉验证；随后设计测试用例并生成 skill；最后逐项检验迭代。","i":743,"u":"https://www.skills.sh/GBSOSS/skill-from-masters/skill-from-masters","r":"GBSOSS/skill-from-masters","s":1566,"p":"2026-02-16","a":"pass+warn","top":true}
 ]
